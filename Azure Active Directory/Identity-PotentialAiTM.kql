@@ -33,7 +33,7 @@ AADSignInEventsBeta
     SessionIds=make_set_if(SessionId, isnotempty(SessionId)),
     IPs = make_set_if(IPAddress, isnotempty(IPAddress))
     by CorrelationId, AccountUpn
-| where ErrorCodes has_all (0, 50140, 50074) // If conditional Access Blocks the SignIn attempt change the has_all to has_all (53000, 50074)
+| where ErrorCodes has_all (0, 50140, 50074) // If conditional Access Blocks the SignIn attempt change the has_all to has_all (53003, 50074)
     and RiskLevels has_any ("50", "100") // Depending on your organisation a lower risk level can be included since some AiTM attempts are only classified as low.
 | extend ['Count of SessionIds']=array_length(SessionIds)
 | extend ['Count of RiskTypes']=array_length(RiskTypes)
